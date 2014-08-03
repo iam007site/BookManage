@@ -30,31 +30,31 @@ public class BookServiceImpl implements BookService{
 	}
 
 	@Override
-	public int addBook(Book book) {
+	public int add(Book book) {
 		// TODO Auto-generated method stub
 		return bookDao.addBook(book);
 	}
 
 	@Override
-	public List<Book> getAllBooks() {
+	public List<Book> getAlls() {
 		// TODO Auto-generated method stub
 		return bookDao.getAllBooks();
 	}
 
 	@Override
-	public Book findBookById(int id) {
+	public Book findById(int id) {
 		// TODO Auto-generated method stub
 		return bookDao.findBookById(id);
 	}
 
 	@Override
-	public int modifyBook(Book book) {
+	public int update(Book book) {
 		// TODO Auto-generated method stub
 		return bookDao.modifyBook(book);
 	}
 
 	@Override
-	public int deleteBookById(int id) {
+	public int deleteById(int id) {
 		// TODO Auto-generated method stub
 		return bookDao.deleteBookById(id);
 	}

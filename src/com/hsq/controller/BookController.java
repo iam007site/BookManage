@@ -51,7 +51,7 @@ public class BookController {
     	System.out.println("RequestMapping-addBook================================================");
     	String resultPage = "result";
     	String infoMessageString = "null";
-    	if(0<=bookService.addBook(book))
+    	if(0<=bookService.add(book))
     	{
     		infoMessageString="插入Book成功";
     	}else{
@@ -66,7 +66,7 @@ public class BookController {
     	System.out.println("RequestMapping-getAllBooks================================================");
     	
 		try {
-			List<Book> booklist = bookService.getAllBooks();
+			List<Book> booklist = bookService.getAlls();
 			request.setAttribute("booklist",booklist);
 			return "listAll";
 		} catch (Exception e) {
@@ -82,9 +82,9 @@ public class BookController {
     public String delete(int id,HttpServletRequest request){
     	System.out.println("RequestMapping-delete================================================");
     	String resultPage ="listAll";
-    	int rid = bookService.deleteBookById(id);
+    	int rid = bookService.deleteById(id);
     	if(rid>0){
-    		List<Book> books=bookService.getAllBooks();
+    		List<Book> books=bookService.getAlls();
     		request.setAttribute("booklist",books);
     	}else {
 			request.setAttribute("infoMessage","删除失败");
@@ -96,9 +96,9 @@ public class BookController {
     public String modify(Book book,HttpServletRequest request){
     	System.out.println("RequestMapping-modify================================================");
     	String resultPage = "listAll";
-    	int uid = bookService.modifyBook(book);
+    	int uid = bookService.update(book);
     	if(uid >0){
-    		List<Book> booklist=bookService.getAllBooks();
+    		List<Book> booklist=bookService.getAlls();
     		request.setAttribute("booklist", booklist);
     	}else {
 			request.setAttribute("infoMessage","修改书籍信息出错");

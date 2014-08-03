@@ -22,6 +22,19 @@ spring-mybatis.xml：spring和mybatis整合的配置文件
 
 controller->service.imp->dao->mapper.xml
 
+mark:
+2014-8-2 完整web应用，可以对书籍进行增删改查
+2014-8-3 添加修改书店商城的实体类：
+Book
+Account
+User
+Trade
+TradeItem
+ShoppingCart
+ShoppingCartItem
+
+
+
 
 
 
