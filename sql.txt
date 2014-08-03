@@ -1,0 +1,12 @@
+create database if not exists hsqbookdb default charset=utf8;
+use hsqbookdb;
+
+create table book (
+id int not null AUTO_INCREMENT,
+bName varchar(255) not null,
+description varchar(255),
+price float,
+primary key(id)
+);
+
+insert into book (bName,description,price) values ('冰与火之歌','权力的游戏','100.05'),('看见','描述我所看见','12.01'),('java核心教程','java学习必备书籍','12.03'),('乱世华尔街','以第一人称给你讲述华尔街的风起云涌','20.8');

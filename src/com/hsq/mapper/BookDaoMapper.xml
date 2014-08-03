@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- namespace 描述的是相关的类的mybatis的操作接口 -->
+
+<mapper namespace="com.hsq.dao.BookDao">
+
+	<resultMap type="com.hsq.model.Book" id="bookListMap">
+		<id column="id" property="id" />
+		<result column="bName" property="bName" />
+		<result column="description" property="description" />
+		<result column="price" property="price" />
+	</resultMap>
+	
+	<select id="getAllBooks" resultMap="bookListMap">
+	select * from book
+	</select>
+	
+	<insert id="addBook" parameterType="com.hsq.model.Book" keyProperty="id">
+     insert into book (bName,description,price) values (#{bName},#{description},#{price})	
+	</insert>
+	
+	<select id="findBookById" resultType="com.hsq.model.Book" parameterType="int">
+	select * from book where id = #{id}
+	</select>
+	
+	<delete id="deleteBookById" parameterType="int">
+	delete from book where id =#{id}
+	</delete>
+	
+	<update id="modifyBook" parameterType="com.hsq.model.Book">
+	update book set bName = #{bName},description = #{description},price = #{price} where id =#{id}
+	</update>
+
+</mapper>
