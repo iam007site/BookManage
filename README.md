@@ -2,6 +2,8 @@ BookManage
 ==========
 
 SpringMVC+Spring+MyBatis整合
+SpringMvc以及Mybatis的整合到web应用，一个完整的web实例，界面就不优化了 …
+附带Mysql建表脚本，适合SpringMvc以及Mybatis入门学习
 
 src 结构：
 com.hsq.dao:存放spring与mybatis连接接口
