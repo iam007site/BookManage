@@ -2,6 +2,8 @@ package com.hsq.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.hsq.model.Book;
 import com.hsq.model.page.Criteria;
 /*
@@ -18,11 +20,16 @@ public interface BookDao {
 	 * 实际实现的就是xml中的sql语句
 	 * 一个dao对应一个mapper.xml，这在spring-mybatis.xml中做了对应
 	 */
+	
+	//通过Mybatis的注解方式传入多个参数
+	List<Book> getBooksByCriteria(@Param(value = "criteria") Criteria criteria,@Param(value = "pageSize") int pageSize);
 	List<Book> getAllBooks();
 	int addBook(Book book);
 	Book findBookById(int id);
 	int deleteBookById(int id);
 	int modifyBook(Book book);
-	Page<Book> getPage(Criteria criteria);
+	//Page<Book> getPage(Criteria criteria);
+	int getTotalBookNumber(Criteria criteria);//根据价格区间计算所有书的数量
+	
 
 }

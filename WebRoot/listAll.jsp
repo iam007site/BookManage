@@ -85,7 +85,7 @@
 	</c:if>
 </center>
 
-	<form action="#" method="post">
+	<form action="listAll.do" method="post">
 		Price: <input type="text" size="1" name="minPrice" /> - 
 		<input type="text" size="1" name="maxPrice" /> 
 		<input type="submit" value="Submit" />
@@ -100,7 +100,7 @@
 			<td>价格</td>
 			<td>操作</td>
 		</tr>
-		<c:forEach items="${booklist}" var="book">
+		<c:forEach items="${bookpage.lists}" var="book">
 			<tr>
 				<td>${book.id}</td>
 				<td>${book.bName}</td>

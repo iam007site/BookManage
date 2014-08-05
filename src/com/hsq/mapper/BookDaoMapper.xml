@@ -16,6 +16,16 @@
 	select * from book
 	</select>
 	
+	<select id="getBooksByCriteria" resultMap="bookListMap">
+	select * from book 
+	where price &gt;= #{criteria.minPrice} and price &lt;= #{criteria.maxPrice} 
+	limit #{(criteria.pageNo-1)*pageSize},#{pageSize}
+	</select>
+	
+	<select id="getTotalBookNumber" parameterType="com.hsq.model.page.Criteria">
+	select count(*) from book where price &gt;= #{minPrice} and price &lt;= #{maxPrice}
+	</select>
+	
 	<insert id="addBook" parameterType="com.hsq.model.Book" keyProperty="id">
      insert into book (bName,description,price) values (#{bName},#{description},#{price})	
 	</insert>

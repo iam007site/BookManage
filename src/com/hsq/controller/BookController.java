@@ -54,7 +54,7 @@ public class BookController {
     	System.out.println("RequestMapping-addBook================================================");
     	String resultPage = "result";
     	String infoMessageString = "null";
-    	if(0<=bookService.add(book))
+    	if(0<=bookService.addBook(book))
     	{
     		infoMessageString="插入Book成功";
     	}else{
@@ -98,9 +98,14 @@ public class BookController {
     	
 		try {
 			Criteria criteria = new Criteria(maxPrice, minPrice, pageNo);
-			Page<Book> = bookService.////
-			List<Book> booklist = bookService.getAlls();
-			request.setAttribute("booklist",booklist);
+			Page<Book> bookpage = new Page<>(criteria.getPageNo());
+			bookpage.setTotalItemNumber(bookService.getTotalBookNumber(criteria));
+			//校验pageNO
+			criteria.setPageNo(bookpage.getPageNo());
+			bookpage.setLists(bookService.getBooksByCriteria(criteria, 3));
+			//Page<Book> = bookService.////
+			//List<Book> booklist = bookService.getAlls();
+			request.setAttribute("bookpage",bookpage);
 			return "listAll";
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -115,10 +120,13 @@ public class BookController {
     public String delete(int id,HttpServletRequest request){
     	System.out.println("RequestMapping-delete================================================");
     	String resultPage ="listAll";
-    	int rid = bookService.deleteById(id);
+    	int rid = bookService.deleteBookById(id);
     	if(rid>0){
-    		List<Book> books=bookService.getAlls();
-    		request.setAttribute("booklist",books);
+    		
+    		//List<Book> books=bookService.getBooksByCriteria(criteria, pageSize)();
+    		//request.setAttribute("booklist",books);
+    		request.setAttribute("infoMessage","删除书籍信息成功");
+			resultPage = "result";
     	}else {
 			request.setAttribute("infoMessage","删除失败");
 		}
@@ -129,10 +137,12 @@ public class BookController {
     public String modify(Book book,HttpServletRequest request){
     	System.out.println("RequestMapping-modify================================================");
     	String resultPage = "listAll";
-    	int uid = bookService.update(book);
+    	int uid = bookService.modifyBook(book);
     	if(uid >0){
-    		List<Book> booklist=bookService.getAlls();
-    		request.setAttribute("booklist", booklist);
+    		//List<Book> booklist=bookService.getAlls();
+    		//request.setAttribute("booklist", booklist);
+    		request.setAttribute("infoMessage","修改书籍信息成功");
+			resultPage = "result";
     	}else {
 			request.setAttribute("infoMessage","修改书籍信息出错");
 			resultPage = "result";

@@ -31,42 +31,47 @@ public class BookServiceImpl implements BookService{
 		this.bookDao = bookDao;
 	}
 
+
 	@Override
-	public int add(Book book) {
+	public int getTotalBookNumber(Criteria criteria) {
+		// TODO Auto-generated method stub
+		return bookDao.getTotalBookNumber(criteria);
+	}
+
+	@Override
+	public List<Book> getBooksByCriteria(Criteria criteria, int pageSize) {
+		// TODO Auto-generated method stub
+		return bookDao.getBooksByCriteria(criteria, pageSize);
+	}
+
+	@Override
+	public int addBook(Book book) {
 		// TODO Auto-generated method stub
 		return bookDao.addBook(book);
 	}
 
 	@Override
-	public List<Book> getAlls() {
+	public List<Book> getAllBooks() {
 		// TODO Auto-generated method stub
 		return bookDao.getAllBooks();
 	}
 
 	@Override
-	public Book findById(int id) {
+	public Book findBookById(int id) {
 		// TODO Auto-generated method stub
 		return bookDao.findBookById(id);
 	}
 
 	@Override
-	public int update(Book book) {
+	public int modifyBook(Book book) {
 		// TODO Auto-generated method stub
 		return bookDao.modifyBook(book);
 	}
 
 	@Override
-	public int deleteById(int id) {
+	public int deleteBookById(int id) {
 		// TODO Auto-generated method stub
 		return bookDao.deleteBookById(id);
-	}
-
-	@Override
-	public Page<Book> getPage(Criteria criteria) {
-		// TODO Auto-generated method stub
-		return bookDao.getPage(criteria);
-	}
-	
-	
+	}		
 
 }

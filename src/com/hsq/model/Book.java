@@ -1,19 +1,16 @@
 package com.hsq.model;
 
+import java.sql.Date;
+
 public class Book {
+	
 	private int id;
 	private String bName;
 	private String description;
 	private double price;
-	
-	
-	
 	public Book() {
 		super();
 	}
-	
-	
-	
 	public Book(int id, String bName, String description, double price) {
 		super();
 		this.id = id;
@@ -21,9 +18,6 @@ public class Book {
 		this.description = description;
 		this.price = price;
 	}
-
-
-
 	public int getId() {
 		return id;
 	}
@@ -48,9 +42,6 @@ public class Book {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-
-
-
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
@@ -63,5 +54,19 @@ public class Book {
 	}
 	
 	
+	/*
+	
+	private Integer id;//数据库id 
+	private String author;
+	
+	private String title;
+	private float price;
+	
+	private Date publishingDate;
+	private int salesAmount;
+	
+	private int storeNumber;
+	private String remark;
+	*/
 
 }
