@@ -1,11 +1,11 @@
 package com.hsq.controller;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.omg.PortableServer.ID_ASSIGNMENT_POLICY_ID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -75,34 +75,36 @@ public class BookController {
     	int pageNo = 1;
     	float minPrice = 0;
     	float maxPrice = Integer.MAX_VALUE;
-    	
-    	try {
+		if (pageNoStr != null) {
 			pageNo = Integer.valueOf(pageNoStr);
-		} catch (NumberFormatException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		}
-    	
-    	try {
+		if (minPriceStr != null) {
 			minPrice = Float.valueOf(minPriceStr);
-		} catch (NumberFormatException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		}
-    	
-    	try {
+		if (maxPriceStr != null) {
 			maxPrice = Float.valueOf(maxPrice);
-		} catch (Exception e) {
-			// TODO: handle exception
 		}
+  
     	
 		try {
 			Criteria criteria = new Criteria(maxPrice, minPrice, pageNo);
+			//System.out.println(criteria.toString());
+			
+			Map<String, Object> params = new HashMap<String, Object>();
+			params.put("minPrice", criteria.getMinPrice());
+			params.put("maxPrice", criteria.getMaxPrice());
+			params.put("pageNo", criteria.getPageNo());
+			params.put("pageSize", 3);
+			
 			Page<Book> bookpage = new Page<>(criteria.getPageNo());
+			bookpage.setPageSize(3);
 			bookpage.setTotalItemNumber(bookService.getTotalBookNumber(criteria));
 			//校验pageNO
 			criteria.setPageNo(bookpage.getPageNo());
 			bookpage.setLists(bookService.getBooksByCriteria(criteria, 3));
+			
+			System.out.println(bookpage.getLists().size());
+			
 			//Page<Book> = bookService.////
 			//List<Book> booklist = bookService.getAlls();
 			request.setAttribute("bookpage",bookpage);

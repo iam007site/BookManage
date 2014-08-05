@@ -1,6 +1,8 @@
 package com.hsq.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,7 +43,15 @@ public class BookServiceImpl implements BookService{
 	@Override
 	public List<Book> getBooksByCriteria(Criteria criteria, int pageSize) {
 		// TODO Auto-generated method stub
-		return bookDao.getBooksByCriteria(criteria, pageSize);
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("minPrice", criteria.getMinPrice());
+		params.put("maxPrice", criteria.getMaxPrice());
+		params.put("start", (criteria.getPageNo()-1)*pageSize);
+		params.put("pageSize", 3);
+		System.out.println("params"+params.toString());
+		
+		return bookDao.getBooksByCriteria(params);
+		//return bookDao.getBooksByCriteria(criteria, pageSize);
 	}
 
 	@Override

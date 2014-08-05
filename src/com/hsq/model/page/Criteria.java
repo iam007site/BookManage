@@ -53,4 +53,12 @@ public class Criteria {
 		this.pageNo = pageNo;
 	}
 
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "Criteria[minPrice="+minPrice+",maxPrice="+maxPrice+",pageNo="+pageNo+"]";
+	}
+	
+	
+
 }
