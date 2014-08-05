@@ -9,40 +9,40 @@ package com.hsq.model.page;
 public class Criteria {
 	/*
 	 * 页查询标准类,
-	 *  最大值：max ,
-	 *  最小值：min ,
+	 *  最大值：maxPrice ,
+	 *  最小值：minPrice ,
 	 *  当前页：pageNo,
 	 */
 
-	private float max = Integer.MAX_VALUE;
-	private float min = 0;
+	private float maxPrice = Integer.MAX_VALUE;
+	private float minPrice = 0;
 	private int pageNo;
 
 	public Criteria() {
 		super();
 	}
 
-	public Criteria(float max, float min, int pageNo) {
+	public Criteria(float maxPrice, float minPrice, int pageNo) {
 		super();
-		this.max = max;
-		this.min = min;
+		this.maxPrice = maxPrice;
+		this.minPrice = minPrice;
 		this.pageNo = pageNo;
 	}
 
-	public float getMax() {
-		return max;
+	public float getMaxPrice() {
+		return maxPrice;
 	}
 
-	public void setMax(float max) {
-		this.max = max;
+	public void setMaxPrice(float maxPrice) {
+		this.maxPrice = maxPrice;
 	}
 
-	public float getMin() {
-		return min;
+	public float getMinPrice() {
+		return minPrice;
 	}
 
-	public void setMin(float min) {
-		this.min = min;
+	public void setMinPrice(float minPrice) {
+		this.minPrice = minPrice;
 	}
 
 	public int getPageNo() {

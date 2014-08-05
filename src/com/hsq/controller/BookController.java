@@ -3,6 +3,7 @@ package com.hsq.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.omg.PortableServer.ID_ASSIGNMENT_POLICY_ID;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hsq.model.Book;
+import com.hsq.model.page.Criteria;
+import com.hsq.model.page.Page;
 import com.hsq.service.BookService;
 
 /*
@@ -62,10 +65,40 @@ public class BookController {
     }
     
     @RequestMapping("listAll")
-    public String findAllBook(HttpServletRequest request){
+    public String findAllBook(HttpServletRequest request,HttpServletResponse response){
     	System.out.println("RequestMapping-getAllBooks================================================");
     	
+    	String pageNoStr = request.getParameter("pageNo");
+    	String minPriceStr = request.getParameter("minPrice");
+    	String maxPriceStr = request.getParameter("maxPrice");
+    	
+    	int pageNo = 1;
+    	float minPrice = 0;
+    	float maxPrice = Integer.MAX_VALUE;
+    	
+    	try {
+			pageNo = Integer.valueOf(pageNoStr);
+		} catch (NumberFormatException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+    	
+    	try {
+			minPrice = Float.valueOf(minPriceStr);
+		} catch (NumberFormatException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+    	
+    	try {
+			maxPrice = Float.valueOf(maxPrice);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+    	
 		try {
+			Criteria criteria = new Criteria(maxPrice, minPrice, pageNo);
+			Page<Book> = bookService.////
 			List<Book> booklist = bookService.getAlls();
 			request.setAttribute("booklist",booklist);
 			return "listAll";

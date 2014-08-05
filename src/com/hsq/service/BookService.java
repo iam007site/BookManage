@@ -9,7 +9,7 @@ import com.hsq.model.Book;
  *email :hsqmobile@gmail.com
  */
 
-public interface BookService extends BaseDao<Book>{
+public interface BookService extends BaseService<Book>{
 
 //	int addBook(Book book);
 //	List<Book> getAllBooks();

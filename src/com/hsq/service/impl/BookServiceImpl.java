@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.hsq.dao.BookDao;
 import com.hsq.model.Book;
+import com.hsq.model.page.Criteria;
+import com.hsq.model.page.Page;
 import com.hsq.service.BookService;
 
 /*
@@ -58,5 +60,13 @@ public class BookServiceImpl implements BookService{
 		// TODO Auto-generated method stub
 		return bookDao.deleteBookById(id);
 	}
+
+	@Override
+	public Page<Book> getPage(Criteria criteria) {
+		// TODO Auto-generated method stub
+		return bookDao.getPage(criteria);
+	}
+	
+	
 
 }

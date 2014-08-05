@@ -1,6 +1,9 @@
 package com.hsq.dao;
 
 import java.util.List;
+
+import com.hsq.model.page.Criteria;
+import com.hsq.model.page.Page;
 /*
  *author:huangshanqi
  *time  :2014-8-3下午6:21:42
@@ -19,5 +22,6 @@ public interface BaseDao<T>{
 	int update(T t);                     //改
 	List<T> getAlls();                   //查
 	T findById(int id);                  //查
+	Page<T> getPage(Criteria criteria);   //查
 
 }

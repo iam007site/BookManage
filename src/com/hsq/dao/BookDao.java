@@ -3,11 +3,13 @@ package com.hsq.dao;
 import java.util.List;
 
 import com.hsq.model.Book;
+import com.hsq.model.page.Criteria;
 /*
  *author:huangshanqi
  *time  :2014-8-2下午11:50:44
  *email :hsqmobile@gmail.com
  */
+import com.hsq.model.page.Page;
 
 public interface BookDao {
 	/*
@@ -21,5 +23,6 @@ public interface BookDao {
 	Book findBookById(int id);
 	int deleteBookById(int id);
 	int modifyBook(Book book);
+	Page<Book> getPage(Criteria criteria);
 
 }
