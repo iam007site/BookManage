@@ -16,14 +16,18 @@
 	select * from book
 	</select>
 	
-	<select id="getBooksByCriteria" resultMap="bookListMap">
+	<select id="getBooksByCriteria" parameterType="java.util.Map" resultMap="bookListMap">
 	select * from book 
-	where price &gt;= #{criteria.minPrice} and price &lt;= #{criteria.maxPrice} 
-	limit #{(criteria.pageNo-1)*pageSize},#{pageSize}
+	where price &gt;= #{minPrice} and price &lt;= #{maxPrice} 
+	limit #{start},#{pageSize}
 	</select>
 	
 	<select id="getTotalBookNumber" parameterType="com.hsq.model.page.Criteria" resultType="int">
+<<<<<<< HEAD
 	select count(*) from book
+=======
+	select count(*) from book where price &gt;= #{minPrice,javaType=float} and price &lt;= #{maxPrice,,javaType=float}
+>>>>>>> 4d6fd7a91a04edc4a384eb97a84277ad7408eb0a
 	</select>
 	
 	<insert id="addBook" parameterType="com.hsq.model.Book" keyProperty="id">

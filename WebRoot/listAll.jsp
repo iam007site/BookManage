@@ -60,7 +60,7 @@
 	
 	function submitPageNo() {
 		if(event.keyCode == 13){
-			var href ="http://www.baidu.com";
+			var href ="listAll.do?pageNo=" + $("#pageNo").val();
 			window.location.href = href;
 		}
 	}
@@ -119,22 +119,22 @@
 	
 	<br><br>
 	
-	共${bookpage.totalPageNumber}页
+	共${bookpage.getTotalpageNumber()}页
 	&nbsp;&nbsp;&nbsp;
-	当前第${pageNo }页
+	当前第${bookpage.pageNo }页
 	&nbsp;&nbsp;&nbsp;
-	<c:if test="${bookpage.hasPrev }">
-	<a href="">首页</a>
+	<c:if test="${bookpage.isHasPrev()}">
+	<a href="listAll.do?pageNo=1">首页</a>
 	&nbsp;&nbsp;&nbsp;
-	<a href="">下一页</a>
+	<a href="listAll.do?pageNo=${bookpage.getPrev()}">上一页</a>
 	</c:if>
     
     &nbsp;&nbsp;&nbsp;
     
-	<c:if test="${bookpage.hasNext }">
-		<a href="">下一页</a>
+	<c:if test="${bookpage.isHasNext() }">
+		<a href="listAll.do?pageNo=${bookpage.getNext()}">下一页</a>
 	&nbsp;&nbsp;&nbsp;
-	<a href="">末页</a>
+	<a href="listAll.do?pageNo=${bookpage.getTotalpageNumber()}">末页</a>
 	</c:if>
 	
 	&nbsp;&nbsp;&nbsp;

@@ -1,6 +1,7 @@
 package com.hsq.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -22,7 +23,9 @@ public interface BookDao {
 	 */
 	
 	//通过Mybatis的注解方式传入多个参数
-	List<Book> getBooksByCriteria(@Param(value = "criteria") Criteria criteria,@Param(value = "pageSize") int pageSize);
+	//List<Book> getBooksByCriteria(@Param(value = "minPrice") String criteria,@Param(value = "pageSize") int pageSize);
+	List<Book> getBooksByCriteria(Map<String, Object> map);
+
 	List<Book> getAllBooks();
 	int addBook(Book book);
 	Book findBookById(int id);

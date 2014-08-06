@@ -10,3 +10,12 @@ primary key(id)
 );
 
 insert into book (bName,description,price) values ('冰与火之歌','权力的游戏','100.05'),('看见','描述我所看见','12.01'),('java核心教程','java学习必备书籍','12.03'),('乱世华尔街','以第一人称给你讲述华尔街的风起云涌','20.8');
+use hsqbookdb;
+insert into book(id,bName,description,price) value ('8','倾城之恋','张爱玲mmmm','12');
+insert into book(id,bName,description,price) value ('1','情人','马格利特·杜拉斯','24');
+insert into book(id,bName,description,price) value ('14','荆棘鸟','考林·麦卡洛','3256');
+insert into book(id,bName,description,price) value ('9','挪威的森林','村上春树','46');
+insert into book(id,bName,description,price) value ('10','失乐园','渡边淳一','770');
+insert into book(id,bName,description,price) value ('11','围城','钱钟书','436.23');
+insert into book(id,bName,description,price) value ('12','爱恋中的女人','劳伦斯','35');
+insert into book(id,bName,description,price) value ('13','飞鸟集','泰戈尔','36');
