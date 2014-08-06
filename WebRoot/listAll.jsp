@@ -1,3 +1,4 @@
+<%@page import="org.apache.jasper.tagplugins.jstl.core.Param"%>
 <%@page import="com.hsq.model.Book"%>
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8" contentType="text/html; charset=utf-8"%>
 <%@ include file="/commons/common.jsp" %>
@@ -78,14 +79,14 @@
 <body>
 
 <center>
-	<c:if test="${param.title != null }">
-	您已经将${param.title}放到购物车中
+	<c:if test="${param.bName != null }">
+	您已经将<<&nbsp;<%=new String(request.getParameter("bName").getBytes("ISO-8859-1"),"utf-8") %>&nbsp;>>放到购物车中
 	<br><br>
 	</c:if>
 	
-	<c:if test="${!empty sessionScope.ShoppingCart.books}">
-	您的购物车中有${sessionScope.ShoppingCart.bookNumber }本书，
-	<a href="">查看购物车</a>
+	<c:if test="${!empty sessionScope.ShoppingCart.getBookMap()}">
+	您的购物车中有${sessionScope.ShoppingCart.getTotalBookNumber() }本书，
+	<a href="listCarts.do">查看购物车</a>
 	</c:if>
 </center>
 
@@ -94,8 +95,8 @@
 		<input type="text" size="1" name="maxPrice" value="${param.maxPrice}"/> 
 		<input type="submit" value="Submit" />
 	</form>
-	：
 	<br>
+	<h4>书目如下：</h4>
 	<table border="1">
 		<tr>
 			<td>id</td>
@@ -115,7 +116,7 @@
 				&nbsp;&nbsp;&nbsp; 
 				<a href="modify.jsp?id=${book.id}&bName=${book.bName}&description=${book.description}&price=${book.price}">修改</a>
 				&nbsp;&nbsp;&nbsp; 
-				<a href="">加入购物车</a>
+				<a href="addToCart.do?id=${book.id}&pageNo=${bookpage.pageNo}&bName=${book.bName}">加入购物车</a>
 				</td>
 			</tr>
 		</c:forEach>
@@ -123,9 +124,9 @@
 	
 	<br><br>
 	
-	共${bookpage.getTotalpageNumber()}页
+	共&nbsp;${bookpage.getTotalpageNumber()}&nbsp;页
 	&nbsp;&nbsp;&nbsp;
-	当前第${bookpage.pageNo }页
+	当前第&nbsp;${bookpage.pageNo }&nbsp;页
 	&nbsp;&nbsp;&nbsp;
 	<c:if test="${bookpage.isHasPrev()}">
 	<a href="listAll.do?pageNo=1">首页</a>

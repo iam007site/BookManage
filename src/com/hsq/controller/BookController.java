@@ -1,5 +1,7 @@
 package com.hsq.controller;
 
+import java.lang.ProcessBuilder.Redirect;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,9 +13,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hsq.model.Book;
+import com.hsq.model.ShoppingCart;
+import com.hsq.model.ShoppingCartItem;
 import com.hsq.model.page.Criteria;
 import com.hsq.model.page.Page;
 import com.hsq.service.BookService;
+import com.hsq.web.WebUtils;
 
 /*
  *author:huangshanqi
@@ -185,9 +190,21 @@ public class BookController {
     	return resultPage;
     }
     
-    
-	
-	
-	
+    @RequestMapping("addToCart")
+    public String addToCart(HttpServletRequest request,HttpServletResponse response){
+    	String idString = request.getParameter("id");
+    	if (idString !=null) {
+			int id = Integer.valueOf(idString);
+			Book book = bookService.findBookById(id);
+			ShoppingCart shoppingCart=WebUtils.getShoppingCart(request);
+			shoppingCart.addBook(book);
+			return findAllBook(request,response);
+		}else {
+			String infoMessage="添加到购物车出错";
+			request.setAttribute("infoMessage", infoMessage);
+			return "result";
+		}
+    }
+   
 
 }

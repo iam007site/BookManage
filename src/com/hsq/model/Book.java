@@ -7,11 +7,11 @@ public class Book {
 	private int id;
 	private String bName;
 	private String description;
-	private double price;
+	private float price;
 	public Book() {
 		super();
 	}
-	public Book(int id, String bName, String description, double price) {
+	public Book(int id, String bName, String description, float price) {
 		super();
 		this.id = id;
 		this.bName = bName;
@@ -36,10 +36,10 @@ public class Book {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public double getPrice() {
+	public float getPrice() {
 		return price;
 	}
-	public void setPrice(double price) {
+	public void setPrice(float price) {
 		this.price = price;
 	}
 	@Override

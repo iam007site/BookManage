@@ -20,6 +20,12 @@ public class ShoppingCartItem {
 		super();
 	}
 
+	public ShoppingCartItem(Book product) {
+		super();
+		this.product = product;
+		this.quantity=1;
+	}
+
 	public ShoppingCartItem(Book product, int quantity) {
 		super();
 		this.product = product;
@@ -40,6 +46,16 @@ public class ShoppingCartItem {
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+	
+	//返回购物项的总钱数
+	public float getItemMoney(){
+		return product.getPrice()*quantity;
+	}
+	
+	//数量加一
+	public void increment(){
+		quantity++;
 	}
 
 	@Override

@@ -15,7 +15,7 @@ public class WebUtils {
 	 */
 	
 	//获取购物车的session
-	public ShoppingCart getShoppingCart(HttpServletRequest request){
+	public static  ShoppingCart getShoppingCart(HttpServletRequest request){
 		ShoppingCart shoppingCart=(ShoppingCart) request.getSession().getAttribute("ShoppingCart");
 		if (null == shoppingCart) {
 		   shoppingCart = new ShoppingCart();
