@@ -22,8 +22,8 @@
 	limit #{(criteria.pageNo-1)*pageSize},#{pageSize}
 	</select>
 	
-	<select id="getTotalBookNumber" parameterType="com.hsq.model.page.Criteria">
-	select count(*) from book where price &gt;= #{minPrice} and price &lt;= #{maxPrice}
+	<select id="getTotalBookNumber" parameterType="com.hsq.model.page.Criteria" resultType="int">
+	select count(*) from book
 	</select>
 	
 	<insert id="addBook" parameterType="com.hsq.model.Book" keyProperty="id">

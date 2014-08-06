@@ -17,7 +17,7 @@ import com.hsq.service.BookService;
 
 /*
  *author:huangshanqi
- *time  :2014-8-2下午4:41:36
+ *time  :2014-8-2涓嬪崍4:41:36
  *email :hsqmobile@gmail.com
 */
 
@@ -48,7 +48,7 @@ public class BookController {
 		this.bookService = bookService;
 	}
     
-    /*响应来自jsp页面action请求*/
+    /*鍝嶅簲鏉ヨ嚜jsp椤甸潰action璇锋眰*/
     @RequestMapping("addBook")
     public String addBook(Book book,HttpServletRequest request){
     	System.out.println("RequestMapping-addBook================================================");
@@ -56,9 +56,9 @@ public class BookController {
     	String infoMessageString = "null";
     	if(0<=bookService.addBook(book))
     	{
-    		infoMessageString="插入Book成功";
+    		infoMessageString="鎻掑叆Book鎴愬姛";
     	}else{
-    		infoMessageString = "插入Book(失败";
+    		infoMessageString = "鎻掑叆Book(澶辫触";
     	}
     	request.setAttribute("infoMessage",infoMessageString);
     	return resultPage;
@@ -75,32 +75,34 @@ public class BookController {
     	int pageNo = 1;
     	float minPrice = 0;
     	float maxPrice = Integer.MAX_VALUE;
-    	
-    	try {
-			pageNo = Integer.valueOf(pageNoStr);
-		} catch (NumberFormatException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		if (pageNoStr != null) {
+
+			try {
+				pageNo = Integer.parseInt(pageNoStr);
+			} catch (NumberFormatException e) {
+			}
 		}
-    	
-    	try {
-			minPrice = Float.valueOf(minPriceStr);
-		} catch (NumberFormatException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+
+		if (minPriceStr != null) {
+			try {
+				minPrice = Integer.parseInt(minPriceStr);
+			} catch (NumberFormatException e) {
+			}
 		}
-    	
-    	try {
-			maxPrice = Float.valueOf(maxPrice);
-		} catch (Exception e) {
-			// TODO: handle exception
+
+		if (maxPriceStr != null) {
+			try {
+				pageNo = Integer.parseInt(pageNoStr);
+			} catch (NumberFormatException e) {
+			}
 		}
     	
 		try {
 			Criteria criteria = new Criteria(maxPrice, minPrice, pageNo);
 			Page<Book> bookpage = new Page<>(criteria.getPageNo());
+			bookpage.setPageSize(3);
 			bookpage.setTotalItemNumber(bookService.getTotalBookNumber(criteria));
-			//校验pageNO
+			//鏍￠獙pageNO
 			criteria.setPageNo(bookpage.getPageNo());
 			bookpage.setLists(bookService.getBooksByCriteria(criteria, 3));
 			//Page<Book> = bookService.////
@@ -110,7 +112,7 @@ public class BookController {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			request.setAttribute("infoMessage","查询出错"+e.getMessage());
+			request.setAttribute("infoMessage","鏌ヨ鍑洪敊"+e.getMessage());
 			return "result";
 		}
   
@@ -125,10 +127,10 @@ public class BookController {
     		
     		//List<Book> books=bookService.getBooksByCriteria(criteria, pageSize)();
     		//request.setAttribute("booklist",books);
-    		request.setAttribute("infoMessage","删除书籍信息成功");
+    		request.setAttribute("infoMessage","鍒犻櫎涔︾睄淇℃伅鎴愬姛");
 			resultPage = "result";
     	}else {
-			request.setAttribute("infoMessage","删除失败");
+			request.setAttribute("infoMessage","鍒犻櫎澶辫触");
 		}
     	return resultPage;
     }
@@ -141,10 +143,10 @@ public class BookController {
     	if(uid >0){
     		//List<Book> booklist=bookService.getAlls();
     		//request.setAttribute("booklist", booklist);
-    		request.setAttribute("infoMessage","修改书籍信息成功");
+    		request.setAttribute("infoMessage","淇敼涔︾睄淇℃伅鎴愬姛");
 			resultPage = "result";
     	}else {
-			request.setAttribute("infoMessage","修改书籍信息出错");
+			request.setAttribute("infoMessage","淇敼涔︾睄淇℃伅鍑洪敊");
 			resultPage = "result";
 		}
     	return resultPage;
