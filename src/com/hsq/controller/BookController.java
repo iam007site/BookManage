@@ -77,7 +77,6 @@ public class BookController {
     	float minPrice = 0;
     	float maxPrice = Integer.MAX_VALUE;
 		if (pageNoStr != null) {
-<<<<<<< HEAD
 
 			try {
 				pageNo = Integer.parseInt(pageNoStr);
@@ -97,7 +96,7 @@ public class BookController {
 				pageNo = Integer.parseInt(pageNoStr);
 			} catch (NumberFormatException e) {
 			}
-=======
+
 			pageNo = Integer.valueOf(pageNoStr);
 			System.out.println("aaaaaaaa"+pageNo);
 		}else{
@@ -108,7 +107,7 @@ public class BookController {
 		}
 		if (maxPriceStr != null) {
 			maxPrice = Float.valueOf(maxPrice);
->>>>>>> 4d6fd7a91a04edc4a384eb97a84277ad7408eb0a
+
 		}
   
     	
@@ -128,12 +127,11 @@ public class BookController {
 			bookpage.setPageSize(3);
 			bookpage.setTotalItemNumber(bookService.getTotalBookNumber(criteria));
 			//鏍￠獙pageNO
-<<<<<<< HEAD
+
 			criteria.setPageNo(pageNo);
 			System.out.println("bookpage.getPageNo()="+criteria.getPageNo()+",bookService.getTotalBookNumber(criteria)="+bookService.getTotalBookNumber(criteria));
-=======
+
 			criteria.setPageNo(bookpage.getPageNo());
->>>>>>> edfe196c54906bf2fd309bff6196f8c67d3c79da
 			bookpage.setLists(bookService.getBooksByCriteria(criteria, 3));
 			
 			System.out.println(bookpage.getLists().size());
