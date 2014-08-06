@@ -1,6 +1,6 @@
 <%@page import="com.hsq.model.Book"%>
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8" contentType="text/html; charset=utf-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="/commons/common.jsp" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -56,17 +56,20 @@
 			//var href ="http://www.baidu.com";
 			//window.location.href = href;
 		});
+		
+		//$(#)
 	});
 	
 	function submitPageNo() {
 		//if(event.keyCode == 13){
-			var href ="listAll.do?pageNo=" + $("#pageNo").val();
+			var href ="listAll.do?pageNo=" + $("#pageNo").val()+ "&" + $(":hidden").serialize();
 			//alter(""+href);
 			window.location.href = href;
 		//}
 	}
 	
 </script>
+<%@ include file="/commons/queryCondition.jsp" %>
 </head>
 
 
@@ -87,8 +90,8 @@
 </center>
 
 	<form action="listAll.do" method="post">
-		Price: <input type="text" size="1" name="minPrice" /> - 
-		<input type="text" size="1" name="maxPrice" /> 
+		Price: <input type="text" size="1" name="minPrice" value="${param.minPrice}"/> - 
+		<input type="text" size="1" name="maxPrice" value="${param.maxPrice}"/> 
 		<input type="submit" value="Submit" />
 	</form>
 	：

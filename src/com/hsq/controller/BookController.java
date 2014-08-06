@@ -76,8 +76,8 @@ public class BookController {
     	int pageNo = 1;
     	float minPrice = 0;
     	float maxPrice = Integer.MAX_VALUE;
+    	
 		if (pageNoStr != null) {
-
 			try {
 				pageNo = Integer.parseInt(pageNoStr);
 			} catch (NumberFormatException e) {
@@ -86,17 +86,17 @@ public class BookController {
 
 		if (minPriceStr != null) {
 			try {
-				minPrice = Integer.parseInt(minPriceStr);
+				minPrice = Float.valueOf(minPriceStr);
 			} catch (NumberFormatException e) {
 			}
 		}
 
 		if (maxPriceStr != null) {
 			try {
-				pageNo = Integer.parseInt(pageNoStr);
-			} catch (NumberFormatException e) {
-			}
-
+				maxPrice = Float.valueOf(maxPriceStr);
+			} catch (NumberFormatException e) {}
+		}
+/*
 			pageNo = Integer.valueOf(pageNoStr);
 			System.out.println("aaaaaaaa"+pageNo);
 		}else{
@@ -104,12 +104,14 @@ public class BookController {
 		}
 		if (minPriceStr != null) {
 			minPrice = Float.valueOf(minPriceStr);
+		}else{
+			System.out.println("minPriceStr == null");
 		}
 		if (maxPriceStr != null) {
 			maxPrice = Float.valueOf(maxPrice);
 
 		}
-  
+  */
     	
 		try {
 			Criteria criteria = new Criteria(maxPrice, minPrice, pageNo);
