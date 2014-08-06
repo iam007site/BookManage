@@ -17,25 +17,25 @@ import com.hsq.service.BookService;
 
 /*
  *author:huangshanqi
- *time  :2014-8-2下午4:41:36
+ *time  :2014-8-2涓嬪崍4:41:36
  *email :hsqmobile@gmail.com
 */
 
 @Controller
 public class BookController {
 	/*
-	 *对应Book相关jsp页面的action请求 
-	 * 1：spring中的C一般起类名XXXController
-	 * 在这个类里面 需要加入@controller标志这个类可以作为请求处理类   也就是 控制类
-       2：这个控制类里面可以有很多方法,哪个方法用来处理用户请求，就在那个方法前面 加  @RequestMapping（“/xxxxx请求路径”）
-       3;当请求处理完毕后返回值决定了该处理完毕后用户将跳转到那个页面 这个很重要 
-                若在web.xml中加入bean配置
+	 *瀵瑰簲Book鐩稿叧jsp椤甸潰鐨刟ction璇锋眰 
+	 * 1锛歴pring涓殑C涓�埇璧风被鍚峏XXController
+	 * 鍦ㄨ繖涓被閲岄潰 闇�鍔犲叆@controller鏍囧織杩欎釜绫诲彲浠ヤ綔涓鸿姹傚鐞嗙被   涔熷氨鏄�鎺у埗绫�
+       2锛氳繖涓帶鍒剁被閲岄潰鍙互鏈夊緢澶氭柟娉�鍝釜鏂规硶鐢ㄦ潵澶勭悊鐢ㄦ埛璇锋眰锛屽氨鍦ㄩ偅涓柟娉曞墠闈�鍔� @RequestMapping锛堚�/xxxxx璇锋眰璺緞鈥濓級
+       3;褰撹姹傚鐞嗗畬姣曞悗杩斿洖鍊煎喅瀹氫簡璇ュ鐞嗗畬姣曞悗鐢ㄦ埛灏嗚烦杞埌閭ｄ釜椤甸潰 杩欎釜寰堥噸瑕�
+                鑻ュ湪web.xml涓姞鍏ean閰嶇疆
        <bean class="org.s...f....web.servlet.view.InternalResourceViewResolver">
-            <property  name="prefix" value="/WEB-INF/views"/>                     前缀
-           <property  name="suffix"   value=".jsp"/>                                        后缀
+            <property  name="prefix" value="/WEB-INF/views"/>                     鍓嶇紑
+           <property  name="suffix"   value=".jsp"/>                                        鍚庣紑
        </bean>
-            若方法返回 return “something”
-            则会跳转到/WEB-INF/views/something.jsp页面
+            鑻ユ柟娉曡繑鍥�return 鈥渟omething鈥�
+            鍒欎細璺宠浆鍒�WEB-INF/views/something.jsp椤甸潰
 	 */
 	private BookService bookService;
 
@@ -48,7 +48,7 @@ public class BookController {
 		this.bookService = bookService;
 	}
     
-    /*响应来自jsp页面action请求*/
+    /*鍝嶅簲鏉ヨ嚜jsp椤甸潰action璇锋眰*/
     @RequestMapping("addBook")
     public String addBook(Book book,HttpServletRequest request){
     	System.out.println("RequestMapping-addBook================================================");
@@ -56,9 +56,9 @@ public class BookController {
     	String infoMessageString = "null";
     	if(0<=bookService.addBook(book))
     	{
-    		infoMessageString="插入Book成功";
+    		infoMessageString="鎻掑叆Book鎴愬姛";
     	}else{
-    		infoMessageString = "插入Book(失败";
+    		infoMessageString = "鎻掑叆Book(澶辫触";
     	}
     	request.setAttribute("infoMessage",infoMessageString);
     	return resultPage;
@@ -66,17 +66,21 @@ public class BookController {
     
     @RequestMapping("listAll")
     public String findAllBook(HttpServletRequest request,HttpServletResponse response){
-    	System.out.println("RequestMapping-getAllBooks================================================");
     	
     	String pageNoStr = request.getParameter("pageNo");
     	String minPriceStr = request.getParameter("minPrice");
     	String maxPriceStr = request.getParameter("maxPrice");
+    	
+    	System.out.println("RequestMapping-getAllBooks================================================request.getParameter(pageNo)="+pageNoStr);
     	
     	int pageNo = 1;
     	float minPrice = 0;
     	float maxPrice = Integer.MAX_VALUE;
 		if (pageNoStr != null) {
 			pageNo = Integer.valueOf(pageNoStr);
+			System.out.println("aaaaaaaa"+pageNo);
+		}else{
+			System.out.println("pageNoStr == null");
 		}
 		if (minPriceStr != null) {
 			minPrice = Float.valueOf(minPriceStr);
@@ -90,17 +94,20 @@ public class BookController {
 			Criteria criteria = new Criteria(maxPrice, minPrice, pageNo);
 			//System.out.println(criteria.toString());
 			
+			/*
 			Map<String, Object> params = new HashMap<String, Object>();
 			params.put("minPrice", criteria.getMinPrice());
 			params.put("maxPrice", criteria.getMaxPrice());
 			params.put("pageNo", criteria.getPageNo());
 			params.put("pageSize", 3);
-			
+			*/
+			System.out.println(criteria);
 			Page<Book> bookpage = new Page<>(criteria.getPageNo());
 			bookpage.setPageSize(3);
 			bookpage.setTotalItemNumber(bookService.getTotalBookNumber(criteria));
-			//校验pageNO
-			criteria.setPageNo(bookpage.getPageNo());
+			//鏍￠獙pageNO
+			criteria.setPageNo(pageNo);
+			System.out.println("bookpage.getPageNo()="+criteria.getPageNo()+",bookService.getTotalBookNumber(criteria)="+bookService.getTotalBookNumber(criteria));
 			bookpage.setLists(bookService.getBooksByCriteria(criteria, 3));
 			
 			System.out.println(bookpage.getLists().size());
@@ -112,7 +119,7 @@ public class BookController {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			request.setAttribute("infoMessage","查询出错"+e.getMessage());
+			request.setAttribute("infoMessage","鏌ヨ鍑洪敊"+e.getMessage());
 			return "result";
 		}
   
@@ -127,10 +134,10 @@ public class BookController {
     		
     		//List<Book> books=bookService.getBooksByCriteria(criteria, pageSize)();
     		//request.setAttribute("booklist",books);
-    		request.setAttribute("infoMessage","删除书籍信息成功");
+    		request.setAttribute("infoMessage","鍒犻櫎涔︾睄淇℃伅鎴愬姛");
 			resultPage = "result";
     	}else {
-			request.setAttribute("infoMessage","删除失败");
+			request.setAttribute("infoMessage","鍒犻櫎澶辫触");
 		}
     	return resultPage;
     }
@@ -143,10 +150,10 @@ public class BookController {
     	if(uid >0){
     		//List<Book> booklist=bookService.getAlls();
     		//request.setAttribute("booklist", booklist);
-    		request.setAttribute("infoMessage","修改书籍信息成功");
+    		request.setAttribute("infoMessage","淇敼涔︾睄淇℃伅鎴愬姛");
 			resultPage = "result";
     	}else {
-			request.setAttribute("infoMessage","修改书籍信息出错");
+			request.setAttribute("infoMessage","淇敼涔︾睄淇℃伅鍑洪敊");
 			resultPage = "result";
 		}
     	return resultPage;

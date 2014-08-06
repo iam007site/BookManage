@@ -4,17 +4,17 @@ import java.util.List;
 
 /*
  *author:huangshanqi
- *time  :2014-8-3下午6:48:23
+ *time  :2014-8-3涓嬪崍6:48:23
  *email :hsqmobile@gmail.com
  */
 
 public class Page<T> {
 	/*
-	 * 每一页类： 
-	 * 当前页码：pageNo
-	 * 内容列表：lists
-	 * 页面内容数目:pageSize
-	 * 总的内容数:totalItemNumber
+	 * 姣忎竴椤电被锛�
+	 * 褰撳墠椤电爜锛歱ageNo
+	 * 鍐呭鍒楄〃锛歭ists
+	 * 椤甸潰鍐呭鏁扮洰:pageSize
+	 * 鎬荤殑鍐呭鏁�totalItemNumber
 	 */
 	private int pageNo;
 	private List<T> lists;
@@ -101,11 +101,12 @@ public class Page<T> {
 	}
 
 	/*
-	 * 获取总的页数
+	 * 鑾峰彇鎬荤殑椤垫暟
 	 */
 	public int getTotalpageNumber() {
+		System.out.println("totalItemNumber="+totalItemNumber);
 		int total = totalItemNumber / pageSize;
-		if (totalItemNumber % pageSize == 0)
+		if (totalItemNumber % pageSize != 0)
 			total++;
 		return total;
 	}

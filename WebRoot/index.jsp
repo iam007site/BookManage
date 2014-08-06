@@ -23,6 +23,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
   <h1>首页</h1>
   </br>
-  <a href="addbook.jsp">添加书目信息</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="listAll.do">查看全部书目</a>
+  <a href="addbook.jsp">添加书目信息</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="listAll.do?pageNo=1">查看全部书目</a>
   </body>
 </html>

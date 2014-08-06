@@ -59,10 +59,11 @@
 	});
 	
 	function submitPageNo() {
-		if(event.keyCode == 13){
+		//if(event.keyCode == 13){
 			var href ="listAll.do?pageNo=" + $("#pageNo").val();
+			//alter(""+href);
 			window.location.href = href;
-		}
+		//}
 	}
 	
 </script>
@@ -139,8 +140,8 @@
 	
 	&nbsp;&nbsp;&nbsp;
 	
-	转到<input type="text" size="1" id="pageNo" onkeypress="submitPageNo()">页
-
+	转到<input type="text" size="1" id="pageNo">页
+<input type="button" onclick="submitPageNo()" value="Go">
 
 
 </body>
